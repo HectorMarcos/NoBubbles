@@ -1,0 +1,9 @@
+## Interface: 30300
+## Title: NoBubbles
+## Notes: Removes bubble graphics and shows only the text when someone speaks.
+## Author: TuNombre
+## Version: 1.0
+## SavedVariables: NoBubblesDB
+## OptionalDeps: Ace3
+
+NoBubbles.lua
