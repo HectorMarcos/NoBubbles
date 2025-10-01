@@ -15,7 +15,6 @@ local defaults = {
         fontSize = 14,
         font = "FRIZQT",        -- FRIZQT, ARIALN, MORPHEUS, SKURRI
         flags = "OUTLINE",      -- "", OUTLINE, THICKOUTLINE
-        color = {1, 1, 1},      -- RGB
     }
 }
 
@@ -49,7 +48,7 @@ function NoBubbles:StyleText(fs)
     local flags = prof.flags ~= "" and prof.flags or nil
 
     fs:SetFont(fontPath, prof.fontSize, flags)
-    fs:SetTextColor(unpack(prof.color))
+    -- Do not override text color → WoW keeps original (/yell red, /say white, etc.)
     fs:SetJustifyH("LEFT")
 end
 
@@ -142,7 +141,6 @@ function NoBubbles:OnInitialize()
     -- Database
     self.db = AceDB:New("NoBubblesDB", defaults)
 
-
     -- Options table
     local options = {
         type = "group",
@@ -181,19 +179,6 @@ function NoBubbles:OnInitialize()
                     AceReg:NotifyChange("NoBubbles")
                 end,
                 order = 3,
-            },
-            color = {
-                type = "color", name = "Text Color", hasAlpha = false,
-                get = function()
-                    local c = NoBubbles.db.profile.color
-                    return c[1], c[2], c[3]
-                end,
-                set = function(_, r, g, b)
-                    NoBubbles.db.profile.color = {r, g, b}
-                    NoBubbles:ApplySettings()
-                    AceReg:NotifyChange("NoBubbles")
-                end,
-                order = 4,
             },
         },
     }
